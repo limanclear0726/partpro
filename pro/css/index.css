@@ -1,0 +1,60 @@
+/*清除浮动*/	
+.clearfix:after {}{
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix {}{
+  zoom: 1;
+}
+
+ul,ol { padding: 0; }
+.btn { border-radius: inherit; padding: 5px 20px; }
+.mybtn-none { background: #fff; color:#000; }
+.mybtn-default { background: #0ec28e; color: #fff; }
+.mybtn-default:hover{ color: #fff; }
+.mybtn-cancel { background: red; color: #fff; margin: 0 15px; }
+
+
+/* 两列右侧自适应布局 */
+.subnav { position: absolute; width: 200px; left: 0 ; height: 100%; background: #f5f6f7;  border-right: 1px solid #ccc; }
+.box { width: 100%; min-width: 1000px; padding: 10px 10px 30px 200px; height:100%;  }
+.con { min-width:900px; padding: 0 0 0 10px; }
+.form-control{ height: 30px; }
+.con1 .form-control{ width: 65%; display: inline-block; }
+.con1 select[name="priority"]{ width: 50%; }
+.con1 { min-height: 45px; border-bottom: 1px solid #ccc; }
+.collbox .title { padding-left: 10px; height: 36px; line-height: 36px; font-weight:bold; background: #f4f9fa; }
+.collbox .title i { margin-right: 5px; }
+
+.table { text-align: center; font-size:13px; }
+.table th { text-align: center; }
+.mytable { width: 50%; float: left; }
+.mytable caption { border: 1px solid #ccc;  border-bottom: none; text-indent: 10px; }
+.search_result {margin-top: 10px; }
+.spaninfo { margin: 15px 0; }
+.addUserGroup { padding: 5px 10px; }
+
+/* 左侧 */
+.usergroup { line-height: 46px; color:#8f9394; font-size: 14px; }
+.usergroup span { margin: 0 0 0 15px; }
+.usergroup a {float: right; margin: 5px 15px 0 0;}
+.task { }
+.task a { width: 48%; }
+
+.taskcon { margin: 15px 0; background: #fff; }
+.taskcon .glyphicon-ok { color: #A0A0A0; }
+.taskcon li { position:relative; padding: 0 10px; line-height: 32px; height: 32px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
+.taskcon li  i { margin: 0 5px 0 0;}
+.taskcon li  i.glyphicon-menu-right { position: absolute; top: 10px; right: 0; font-size: 8px; }
+.taskcon li.current { background: #c8e8de; }
+
+.collbox { margin: 0 0 15px 0; }
+.collbox .title { cursor: pointer; }
+.nublabel { font-size: 12px; }
+
+
+
+
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>数据分析平台</title>
+    <!-- Bootstrap -->
+    <link href="lib/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="lib/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- left menu -->
+    <div class="subnav">
+        <!-- 用户分组 -->
+        <div class="usergroup">
+            <span>用户分组</span>
+            <a href="javascript:void(0)" role="button" class="btn mybtn-default addUserGroup">
+                <i class="glyphicon glyphicon-plus"></i>  
+            </a>
+            
+        </div>
+
+        <!-- 任务类型 单次 例行-->
+        <div class="task"> 
+          <a href="javascript:void(0)" role="button" data-tab="tab1" class="btn btn mybtn-none mybtn-default">单次</a>
+          <a href="javascript:void(0)" role="button" data-tab="tab2" class="btn mybtn-none" >例行</a>
+        </div>
+        <div class="taskcon">
+            <ul class="taskcon_tab1">
+                <li class="current"><i class="glyphicon glyphicon-ok"></i>过去7天访问的用户<i class="glyphicon glyphicon-menu-right"></i></li>
+                <li><i class="glyphicon glyphicon-ok"></i>活跃用户的分组<i class="glyphicon glyphicon-menu-right"></i></li>
+                <li><i class="glyphicon glyphicon-ok"></i>流失活跃用户的分组<i class="glyphicon glyphicon-menu-right"></i></li>
+                <li><i class="glyphicon glyphicon-ok"></i>非活跃用户的分组<i class="glyphicon glyphicon-menu-right"></i></li>
+            </ul>
+    
+            <ul class="taskcon_tab2" style="display:none">
+                <li class="current"><i class="glyphicon glyphicon-ok"></i>111212过去7天访问的用户<i class="glyphicon glyphicon-menu-right"></i></li>
+                <li><i class="glyphicon glyphicon-ok"></i>1212活跃用户的分组<i class="glyphicon glyphicon-menu-right"></i></li>
+                <li><i class="glyphicon glyphicon-ok"></i>1212流失活跃用户的分组<i class="glyphicon glyphicon-menu-right"></i></li>
+                <li><i class="glyphicon glyphicon-ok"></i>12非活跃用户的分组<i class="glyphicon glyphicon-menu-right"></i></li>
+            </ul>
+        </div>
+        
+
+    </div>
+    <!-- right con -->
+    <div class="box">
+        <!-- 用户名 -->
+        <div class="con con1">
+            <input type="hidden" class="groupData" value='' id="" /> 
+            <form class="">
+              <div class="col-sm-3">
+                <label for="groupname">分组名</label>
+                <input type="text" class="form-control" name="groupname" id="groupname" placeholder="">
+              </div>
+
+               <div class="col-sm-3">
+                    <label for="groupinfo">注释</label>
+                    <input type="textarea" class="form-control" name="groupinfo" id="groupinfo" placeholder="">
+              </div>
+              <div class="col-sm-3">
+                    <label for="priority">分组优先级</label>
+                    <select class="form-control" name="priority" id="priority">
+                        <option value="2">高优先级</option>
+                        <option value="1">优先级一般</option>
+                        <option value="0">低优先级</option>
+                    </select>
+              </div>
+
+              <div class="col-sm-2">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="task" id="task0" value="0" checked>
+                    单次
+                  </label>
+                  <label>
+                    <input type="radio" name="task" id="task1" value="1" checked>
+                    例行
+                  </label>
+                </div>  
+              </div>  
+           </form>
+        </div>
+
+        <!-- con2-->
+        <div class="con con2">
+            <p class="spaninfo">满足如下条件的用户:</p>
+
+            <!-- 查询条件 -->
+            <div class="collbox searchbox">
+                <div class="title"><i class="glyphicon glyphicon-chevron-up"></i>查询条件</div>
+                <div class="content">
+                    <textarea class="form-control" name="serachTag"></textarea>
+                    <div class="btnbox">
+                         <a href="javascript:void(0)" class="btn mybtn-default searchBtn">查询</a>
+                         <label class="nublabel">选取行数</label>
+                         <input type="number" value="5" name="nub" class="selectnub"  />
+                    </div>
+                    <div class="search_result">
+                         <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>uid</th>
+                                <th>cellphone</th>
+                                <th>key0</th>
+                                <th>key1</th>
+                                <th>ctime</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>188814</td>
+                                <td>188934394934</td>
+                                <td>dlab</td>
+                                <td>dlab2</td>
+                                <td>1988-19-12</td>
+                            </tr>
+                            </tbody>
+                         </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 数据源表 -->
+            <div class="collbox sourcebox clearfix">
+                <div class="title"><i class="glyphicon glyphicon-chevron-up glyphicon-chevron-down-chevron-down"></i>数据源表</div>
+                <div class="content clearfix">
+                
+                <table class="table table-bordered mytable">
+                    <caption>用户行为表：user_event_music</caption>
+                    <tr><th>字段</th><th>描述</th><th>类型</th></tr>
+                    <tr>
+                        <td>ctime</td>
+                        <td>时间</td>
+                        <td>datetime</td>
+                    </tr>
+                    <tr>
+                        <td>uid</td>
+                        <td>用户id</td>
+                        <td>init</td>
+                    </tr>
+                </table>
+               
+                <table class="table table-bordered mytable">
+                    <caption>用户行为表：user_event_music</caption>
+                    <tr><th>字段</th><th>描述</th><th>类型</th></tr>
+                    <tr>
+                        <td>ctime</td>
+                        <td>时间</td>
+                        <td>datetime</td>
+                    </tr>
+                    <tr>
+                        <td>uid</td>
+                        <td>用户id</td>
+                        <td>init</td>
+                    </tr>
+                    <tr>
+                        <td>uid</td>
+                        <td>用户id</td>
+                        <td>init</td>
+                    </tr>
+                    <tr>
+                        <td>uid</td>
+                        <td>用户id</td>
+                        <td>init</td>
+                    </tr>
+                </table>
+                     
+                </div>
+            </div>
+
+            <!-- savebox-->
+            <div class="savebox">
+                <a href="javascript:void(0)" class="btn mybtn-default savebtn" role="button">保存</a>
+                <a href="javascript:void(0)" class="btn mybtn-cancel delbtn" role="button">删除</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    
+  </body>
+</html>
