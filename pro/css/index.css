@@ -10,6 +10,7 @@
 }
 
 ul,ol { padding: 0; }
+label { font-weight:  normal; }
 .btn { border-radius: inherit; padding: 5px 20px; }
 .mybtn-none { background: #fff; color:#000; }
 .mybtn-default { background: #0ec28e; color: #fff; }
@@ -53,6 +54,17 @@ ul,ol { padding: 0; }
 .collbox { margin: 0 0 15px 0; }
 .collbox .title { cursor: pointer; }
 .nublabel { font-size: 12px; }
+.template { padding: 8px 0 8px 28px; border: 1px solid #ccc; border-left: none; border-right: none; }
+.template .template_select { width: 200px; }
+.template .addTemplate { cursor: pointer; margin-left:4px; }
+
+#mytempplate textarea.template_info,#mytempplate .template_addr{ width:60%; }
+#mytempplate .form-inline { margin: 8px 0 ;}
+.template_list { display: inline-block; }
+.templatename { display: inline-block;  background: #0ec28e; color: #fff;  padding:3px 18px; font-size: 12px; cursor: pointer; }
+.templatename  a:hover { text-decoration: none; }
+
+
 
 
 

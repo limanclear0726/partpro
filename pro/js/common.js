@@ -68,7 +68,7 @@ componentGroup.prototype = {
 		//查询条件
 		_this.obj.find('textarea[name="serachTag"]').val(_this.data.search && _this.data.search.sql ? _this.data.search.sql :"" );
 		_this.obj.find('input[name="nub"]').val(_this.data.search && _this.data.search.nub ? _this.data.search.nub :5);
-		_this.obj.find('select[name="priority"]').val(_this.data.search && _this.data.search.nub ? _this.data.search.priority:0);
+		_this.obj.find('select[name="priority"]').val(_this.data.search && _this.data.search.priority ? _this.data.search.priority:0);
 		
 		if(_this.data.search && _this.data.search.result && _this.data.search.result.tablelist.length>0 ) {
 			_this.renderSearchResult(_this.data.search.result);
@@ -78,8 +78,6 @@ componentGroup.prototype = {
 		if(_this.data.source && _this.data.source.tablelist){
 			_this.renderSourceResult(_this.data.source);
 		}
-		
-
 
 	},
 

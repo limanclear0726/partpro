@@ -123,10 +123,12 @@ $(document).ready(function(){
 	$("body").on('click','.taskcon li',function(event){
 		var $this = $(this);
 		var data = $this.attr('data');
-		$this.siblings('li').removeClass('current');
+		$this.siblings('li').removeClass('current');;
 		$this.addClass('current');
 		window.componentGroup.setData(JSON.parse(data));
 	});
+
+	$('[data-toggle="tooltip"]').tooltip({html : true });
 
 	//用户分组的点击事件
 	$('body').on('click','.addUserGroup',function(){

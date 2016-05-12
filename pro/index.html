@@ -184,6 +184,20 @@
                 </div>
             </div>
 
+            <!-- Template 模板 -->
+            <div class="collbox template">
+               <div class="form-inline">
+                    <label for="template">推送模板：</label>
+                    <select name="template" class="form-control template_select">
+                        <option value="a">模板A</option>
+                        <option value="b">模板B</option>
+                        <option value="c">模板c</option>
+                    </select>
+                    <i class="glyphicon glyphicon-plus-sign addTemplate" data-toggle="modal" data-target="#mytempplate"></i>
+                </div>
+                
+            </div>
+
             <!-- savebox-->
             <div class="savebox">
                 <a href="javascript:void(0)" class="btn mybtn-default savebtn" role="button">保存</a>
@@ -194,6 +208,83 @@
 
     </div>
 
+
+    <!-- tempplate -->
+    <div class="modal fade" id="mytempplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="templateheader">
+                <div class=" template_list">
+                    <a class="templatename">模板A</a>
+                    <a class="templatename">模板b</a>
+
+                </div>
+                <a class="templatename">+模板b</a>
+                <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="添加模板B，通过AB测试的方法对比哪个模板内容更好"></i>
+            </div>
+          </div>
+          <div class="modal-body">
+                <div class="form-inline">
+                    <label class="col-sm-2">标题:</label>
+                    <input type="text" class="form-control" name="template_name" />
+
+                    <label class="radio-inline">
+                    <input type="radio" name="noticemethod" id="noticemethod1" value="1"> 顶栏通知
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="noticemethod" id="noticemethod2" value="2"> 弹窗通知
+                    </label>
+
+                </div>
+                 <div class="form-inline">
+                    <label class="col-sm-2">内容:</label>
+                    <textarea  class="form-control template_info" name="template_info"  ></textarea>
+                    <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="<div style='text-align:left'>1、内容中可加变量<br/> 2、变量说明 <div style='padding-left:15px;'> a.$用户图像的指标英文名 <br/>b.例如时间：$time;<br/>地域:$area;</br>详情参照用户画像 </div></div>"></i>
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2">点击通知:</label>
+
+                    <label class="radio-inline">
+                      <input type="radio" name="clicknotice" id="clicknotice1" value="1"> 打开应用
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="clicknotice" id="clicknotice2" value="2"> 打开指定页面
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="clicknotice" id="clicknotice3" value="3"> 打开URL
+                    </label>
+
+                    
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2">地址:</label>
+                    <input type="text" class="form-control template_addr" name="template_addr" />
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2">提醒方式:</label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="remind1" value="1"> 提醒
+                    </label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="remind2" value="2"> 闹铃
+                    </label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="remind13" value="3"> 震动
+                    </label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="remind13" value="4"> 不可删除
+                    </label>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary mybtn-default">保存</button>
+            <button type="button" class="btn btn-default mybtn-cancel" data-dismiss="modal">关闭</button>    
+          </div>
+        </div>
+      </div>
+    </div>
     
   </body>
 </html>
