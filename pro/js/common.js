@@ -269,7 +269,7 @@ Template.prototype =  {
 		this.data = tabdata;
 		var _this = this, temparr = [];
 		for(var i = 0 ; i < tabdata.length; i++ ){
-			temparr.push('<a class="templatename" id="'+tabdata[i].id+'" data=\''+JSON.stringify(tabdata[i].data)+'\' >'+tabdata[i].name+'</a>');
+			temparr.push('<a class="templatename" id="'+tabdata[i].id+'" data=\''+JSON.stringify(tabdata[i])+'\' >'+tabdata[i].name+'</a>');
 		}
 		_this.obj.find(".template_list").html(temparr.join(""));
 
@@ -278,7 +278,7 @@ Template.prototype =  {
 	getAjax:function(success){
 
 		// 测试数据
-		var tabdata = [{"id":"1","name":"模板A","data":{"name":"模板A","notice_method":"1","info":"内容","click_notice":"1",}},
+		var tabdata = [{"id":"1","name":"模板A","name":"模板A","notice_method":"1","info":"内容","click_notice":"1","addr":"北京市海淀区","remind":[1,2,3]},
 				];
 		success(tabdata);
 	
@@ -323,7 +323,7 @@ Template.prototype =  {
 		_this.obj.find('input[name="template_id"]').val(data['id'] ? data['id'] :-1); 
 		_this.obj.find('input[name="template_name"]').val(data.name ? data.name : '');
 		_this.obj.find('input[name="notice_method"][value="'+(data.notice_method ? data.notice_method : 1)+'"]').prop("checked",true);
-		_this.obj.find('textarea[name="template_info"]').prop(data.info ? data.info : '');
+		_this.obj.find('textarea[name="template_info"]').val(data.info ? data.info : '');
 		_this.obj.find('input[name="click_notice"][value="'+(data.click_notice ? data.click_notice : 1)+'"]').prop("checked",true);
 		_this.obj.find('input[name="template_addr"]').val(data.addr ? data.addr : '');
 
@@ -354,6 +354,7 @@ Template.prototype =  {
 
 		if(!_this.checkData(data)){
 			_this.obj.find('.errormsg').text("请完善信息后保存！");
+			return false;
 		}
 
 		//判断是新增 还是修改的数据
@@ -404,6 +405,7 @@ Template.prototype =  {
 		_this.obj.find('input[name="click_notice"][id="click_notice1"]').prop('checked',true);
 		_this.obj.find('input[name="template_addr"]').val('');
 		_this.obj.find('input[class="remind"]').prop('checked',false);
+		_this.obj.find('.errormsg').html('');
 
 	},
 
@@ -417,6 +419,8 @@ Template.prototype =  {
 			var data = JSON.parse($(self).attr('data'));
 			data['id'] = $(self).attr('id');
 			_this.setData(data);
+			$('.templatename').removeClass('current');
+			$(self).addClass('current');
 		});
 
 		//添加模板事件
@@ -427,6 +431,8 @@ Template.prototype =  {
 				alert("您添加的模板不能超过4个");
 				return false;
 			}
+			$('.templatename').removeClass('current');
+			$(self).addClass('current');
 
 			_this.clear();
 
@@ -434,9 +440,7 @@ Template.prototype =  {
 
 		//模板保存按钮
 		$("body").on('click','.template_save',function(event){
-
-			_this.saveData();
-			
+			_this.saveData();	
 		});
 
 		//关闭按钮

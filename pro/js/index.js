@@ -136,10 +136,9 @@ $(document).ready(function(){
 
 	});
 
-	
+	window.template = new Template({"obj":$('#mytempplate'),data:[]});
 	//点击添加模板弹窗事
 	$("body").on('click','.addTemplate',function(event){
-		window.template = !window.template ? new Template({"obj":$('#mytempplate'),data:[]}): window.template;
 		window.template.init()
 	});
 
