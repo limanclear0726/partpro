@@ -257,8 +257,9 @@ Template.prototype =  {
 		_this.getAjax(function(tabdata){
 			
 			_this.render(tabdata);
-			_this.obj.find("a.templatename:first").click();
+			
 			_this.bindEvent();
+			_this.obj.find("a.templatename:first").click();
 		});
 		
 	},
@@ -421,7 +422,7 @@ Template.prototype =  {
 		//添加模板事件
 		$("body").on('click','a.addTemplatename',function(event){
 			var self = this;
-			var length = obj.find('a.templatename').length;
+			var length = _this.data.length;
 			if(length > 4){
 				alert("您添加的模板不能超过4个");
 				return false;
