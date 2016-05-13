@@ -413,6 +413,10 @@ Template.prototype =  {
 		var _this = this;
 		var obj = $(_this.obj);
 
+		$("body").off('click','.template_list a.templatename');
+		$("body").off('click','.template_list a.addTemplatename');
+		$("body").off('click','.template_save');
+
 		// tabnav 模板a 点击事件
 		$("body").on('click','.template_list a.templatename',function(event){
 			var self = this;
