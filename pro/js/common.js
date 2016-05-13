@@ -1,6 +1,6 @@
 /**
 date:2016-5-7
-author:limanclear@163.com
+author:limanclear@163.com/limanclear@didichuxingcom
 json数据格式
 
 {"id":1,"name":"过去7天访问的用户","type":0,"info":"test1etest", 
@@ -235,4 +235,228 @@ componentGroup.prototype = {
 
 	}
 
+
 };
+
+//模板
+
+//[{"id":"1","name":"模板A","data":{"name":"模板A","notice_method":"1","info":"内容","click_notice":"1",}}];
+
+var Template = function(option){
+	this.data = option.data;
+	this.obj  = option.obj;
+	this.temp_tabdata = [];
+};
+
+Template.prototype =  {
+
+	init:function(){
+		var _this = this;
+		
+		//实时获取模板标题数据
+		_this.getAjax(function(tabdata){
+			
+			_this.render(tabdata);
+			_this.obj.find("a.templatename:first").click();
+			_this.bindEvent();
+		});
+		
+	},
+
+	//模板头部标题 tabdata = [{"id":"",name:"","data"={}}];
+	render:function(tabdata){
+		this.data = tabdata;
+		var _this = this, temparr = [];
+		for(var i = 0 ; i < tabdata.length; i++ ){
+			temparr.push('<a class="templatename" id="'+tabdata[i].id+'" data=\''+JSON.stringify(tabdata[i].data)+'\' >'+tabdata[i].name+'</a>');
+		}
+		_this.obj.find(".template_list").html(temparr.join(""));
+
+	},
+
+	getAjax:function(success){
+
+		// 测试数据
+		var tabdata = [{"id":"1","name":"模板A","data":{"name":"模板A","notice_method":"1","info":"内容","click_notice":"1",}},
+				];
+		success(tabdata);
+	
+		//交互数据保存模板
+		
+		// $.ajax({
+		// 	url:"",
+		// 	data:data,
+		// 	success:function(result){
+  //     			if(result.status == 200){
+  //     				success(result.data);
+  //     			} else {
+  //     				console.log('获取模板头部标题出错 tab title :'+result.msg);
+  //     			}
+  //   		}
+  //   	});
+		
+
+	},
+
+	getData:function(){
+		var _this = this;
+		var data = {};
+		data['id'] = _this.obj.find('input[name="template_id"]').val();
+		data['name'] = _this.obj.find('input[name="template_name"]').val();
+		data['notice_method'] = _this.obj.find('input[name="notice_method"]:checked').val();
+		data['info'] = _this.obj.find('textarea[name="template_info"]').val();
+		data['click_notice'] = _this.obj.find('input[name="click_notice"]:checked').val();
+		data['addr'] = _this.obj.find('input[name="template_addr"]').val();
+		data['remind'] = [];
+
+		$(_this.obj).find('input[class="remind"]:checked').each(function(){  
+			data['remind'].push($(this).val());//向数组中添加元素  
+		}); 
+
+		return data;
+	},
+
+	setData:function(data){
+	
+		var _this = this;
+		_this.obj.find('input[name="template_id"]').val(data['id'] ? data['id'] :-1); 
+		_this.obj.find('input[name="template_name"]').val(data.name ? data.name : '');
+		_this.obj.find('input[name="notice_method"][value="'+(data.notice_method ? data.notice_method : 1)+'"]').prop("checked",true);
+		_this.obj.find('textarea[name="template_info"]').prop(data.info ? data.info : '');
+		_this.obj.find('input[name="click_notice"][value="'+(data.click_notice ? data.click_notice : 1)+'"]').prop("checked",true);
+		_this.obj.find('input[name="template_addr"]').val(data.addr ? data.addr : '');
+
+		if(data.remind){
+			for(var i = 0; i < data.remind.length; i++){
+				_this.obj.find('input[class="remind"][value="'+data.remind[i]+'"]').prop("checked",true);
+			}
+		}
+
+	},
+
+	checkData:function(data){
+		var errormsg = [];
+		var _this = this;
+	
+		if(data.name == "" || data.info == "" ||  data.addr == "" || data.remind.length == 0){
+			return false;
+		}
+		return data;
+
+	},
+
+	saveData:function(){
+		console.log(this.data);
+		var _this = this;
+		var data = _this.getData();
+		var optiondata = [];
+
+		if(!_this.checkData(data)){
+			_this.obj.find('.errormsg').text("请完善信息后保存！");
+		}
+
+		//判断是新增 还是修改的数据
+		if(data.id > 0){
+			//修改的 清洗数据
+			for(var p in _this.data){
+				if(_this.data == data.id){
+					optiondata.push(data);
+				} else{
+					optiondata.push(_this.data[p]);
+				}
+			}
+
+		} else {
+			//新增的
+			optiondata = this.data;
+			data['id'] = (new Date()).valueOf();
+			optiondata.push(data);
+		}
+
+		//交互数据保存模板
+		
+		// $.ajax({
+		// 	url:"",
+		// 	data:optiondata,
+		// 	success:function(result){
+  //     			if(result.status == 200){
+       				
+  						_this.data = optiondata; 
+						_this.render_template_select(optiondata);
+						_this.obj.modal('hide');
+
+  //     			} else {
+  //     				alert(result.msg);
+  //     			}
+  //   		}
+  //   	});
+		
+
+	},
+
+	clear:function(){
+		var _this = this;
+		_this.obj.find('input[name="template_id"]').val(-1);
+		_this.obj.find('input[name="template_name"]').val('');
+		_this.obj.find('input[name="notice_method"][id="notice_method1"]').prop('checked',true);
+		_this.obj.find('textarea[name="template_info"]').val('');
+		_this.obj.find('input[name="click_notice"][id="click_notice1"]').prop('checked',true);
+		_this.obj.find('input[name="template_addr"]').val('');
+		_this.obj.find('input[class="remind"]').prop('checked',false);
+
+	},
+
+	bindEvent:function(){
+		var _this = this;
+		var obj = $(_this.obj);
+
+		// tabnav 模板a 点击事件
+		$("body").on('click','.template_list a.templatename',function(event){
+			var self = this;
+			var data = JSON.parse($(self).attr('data'));
+			data['id'] = $(self).attr('id');
+			_this.setData(data);
+		});
+
+		//添加模板事件
+		$("body").on('click','a.addTemplatename',function(event){
+			var self = this;
+			var length = obj.find('a.templatename').length;
+			if(length > 4){
+				alert("您添加的模板不能超过4个");
+				return false;
+			}
+
+			_this.clear();
+
+		});
+
+		//模板保存按钮
+		$("body").on('click','.template_save',function(event){
+
+			_this.saveData();
+			
+		});
+
+		//关闭按钮
+
+	},
+
+	//渲染添加的模板
+	render_template_select:function(optiondata){
+		var temparr = [];
+		for(var i = 0; i< optiondata.length; i++){
+			temparr.push('<option value="'+optiondata[i].id+'">'+optiondata[i].name+'</option>');
+		}
+		$('.template select[name="template"]').html(temparr.join(""));
+	}
+
+
+};
+
+
+
+
+
+
+

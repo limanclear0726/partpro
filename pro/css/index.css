@@ -11,6 +11,7 @@
 
 ul,ol { padding: 0; }
 label { font-weight:  normal; }
+.maincolor { color: #0ec28e;}
 .btn { border-radius: inherit; padding: 5px 20px; }
 .mybtn-none { background: #fff; color:#000; }
 .mybtn-default { background: #0ec28e; color: #fff; }
@@ -64,9 +65,7 @@ label { font-weight:  normal; }
 .templatename { display: inline-block;  background: #0ec28e; color: #fff;  padding:3px 18px; font-size: 12px; cursor: pointer; }
 .templatename  a:hover { text-decoration: none; }
 
-
-
-
+.errormsg { color: red;margin: 5px; }
 
 
 

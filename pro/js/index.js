@@ -128,13 +128,19 @@ $(document).ready(function(){
 		window.componentGroup.setData(JSON.parse(data));
 	});
 
-	$('[data-toggle="tooltip"]').tooltip({html : true });
-
+	$('[data-toggle="tooltip"]').tooltip({html : true});
 	//用户分组的点击事件
 	$('body').on('click','.addUserGroup',function(){
 		window.componentGroup.add();
 		$('.taskcon li').removeClass('current');
 
+	});
+
+	
+	//点击添加模板弹窗事
+	$("body").on('click','.addTemplate',function(event){
+		window.template = !window.template ? new Template({"obj":$('#mytempplate'),data:[]}): window.template;
+		window.template.init()
 	});
 
 
