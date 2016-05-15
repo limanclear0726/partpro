@@ -277,7 +277,7 @@ Template.prototype =  {
 
 		// 测试数据
 		if(this.data.length == 0){
-			this.data = [{"id":"1","text":"模板A","name":"模板A","notice_method":"1","info":"内容","click_notice":"1","addr":"北京市海淀区","remind":[1,2,3]},
+			this.data = [{"id":"1","text":"模板A","name":"模板A","notice_method":1,"info":"内容","click_notice":2,"addr":"北京市海淀区","remind":[1,2,3]},
 				];
 		}
 		
@@ -321,16 +321,18 @@ Template.prototype =  {
 	setData:function(data){
 	
 		var _this = this;
+		var notice_method = data.notice_method ? data.notice_method : 1;
+		var click_notice = data.click_notice ? data.click_notice : 1;
+
 		_this.obj.find('input[name="template_id"]').val(data['id'] ? data['id'] :-1); 
 		_this.obj.find('input[name="template_name"]').val(data.name ? data.name : '');
-		_this.obj.find('input[name="notice_method"][value="'+(data.notice_method ? data.notice_method : 1)+'"]').prop("checked",true);
+		_this.obj.find('input[name="notice_method"][value="'+notice_method+'"]').prop("checked",true);
 		_this.obj.find('textarea[name="template_info"]').val(data.info ? data.info : '');
-		_this.obj.find('input[name="click_notice"][value="'+(data.click_notice ? data.click_notice : 1)+'"]').prop("checked",true);
+		_this.obj.find('input[name="click_notice"][value="'+click_notice+'"]').prop("checked",true);
 		_this.obj.find('input[name="template_addr"]').val(data.addr ? data.addr : '');
 		_this.obj.find('input[class="remind"]').prop("checked",false);
 		if(data.remind){
 			for(var i = 0; i < data.remind.length; i++){
-				console.log(data.remind[i]);
 				_this.obj.find('input[class="remind"][value="'+data.remind[i]+'"]').prop("checked",true);
 			}
 		}
@@ -354,15 +356,17 @@ Template.prototype =  {
 		var optiondata = [];
 
 		if(!_this.checkData(data)){
-			_this.obj.find('.errormsg').text("请完善信息后保存！");
+			_this.obj.find('.errormsg').text("请完善信息后保存！").show();
 			return false;
 		}
 
 		//判断是新增 还是修改的数据
 		if(data.id > 0){
-			//修改的 清洗数据
+			//修改的清洗数据
 			for(var p in _this.data){
-				if(_this.data == data.id){
+
+				if(_this.data[p].id == data.id){
+					data['text'] = _this.temp_tabdata[p];
 					optiondata.push(data);
 				} else{
 					optiondata.push(_this.data[p]);
@@ -421,6 +425,7 @@ Template.prototype =  {
 
 		// tabnav 模板a 点击事件
 		$("body").on('click','.template_list a.templatename',function(event){
+			_this.clear();
 			var self = this;
 			var data = JSON.parse($(self).attr('data'));
 			data['id'] = $(self).attr('id');
