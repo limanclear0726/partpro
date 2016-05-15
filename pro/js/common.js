@@ -265,7 +265,6 @@ Template.prototype =  {
 
 	//模板头部标题 tabdata = [{"id":"",name:"","data"={}}];
 	render:function(tabdata){
-		this.data = tabdata;
 		var _this = this, temparr = [];
 		for(var i = 0 ; i < tabdata.length; i++ ){
 			temparr.push('<a class="templatename" id="'+tabdata[i].id+'" data=\''+JSON.stringify(tabdata[i])+'\' >'+tabdata[i].text+'</a>');
@@ -328,9 +327,10 @@ Template.prototype =  {
 		_this.obj.find('textarea[name="template_info"]').val(data.info ? data.info : '');
 		_this.obj.find('input[name="click_notice"][value="'+(data.click_notice ? data.click_notice : 1)+'"]').prop("checked",true);
 		_this.obj.find('input[name="template_addr"]').val(data.addr ? data.addr : '');
-
+		_this.obj.find('input[class="remind"]').prop("checked",false);
 		if(data.remind){
 			for(var i = 0; i < data.remind.length; i++){
+				console.log(data.remind[i]);
 				_this.obj.find('input[class="remind"][value="'+data.remind[i]+'"]').prop("checked",true);
 			}
 		}
@@ -341,7 +341,7 @@ Template.prototype =  {
 		var errormsg = [];
 		var _this = this;
 	
-		if(data.name == "" || data.info == "" ||  data.addr == "" || data.remind.length == 0){
+		if(data.name == "" || data.info == "" ||  data.addr == "" || data.remind.length == 0 || !data.click_notice || !data.notice_method ){
 			return false;
 		}
 		return data;
@@ -407,7 +407,7 @@ Template.prototype =  {
 		_this.obj.find('input[name="click_notice"][id="click_notice1"]').prop('checked',true);
 		_this.obj.find('input[name="template_addr"]').val('');
 		_this.obj.find('input[class="remind"]').prop('checked',false);
-		_this.obj.find('.errormsg').html('');
+		_this.obj.find('.errormsg').html('').hide();
 
 	},
 
@@ -434,7 +434,7 @@ Template.prototype =  {
 			var self = this;
 			var length = _this.data.length;
 			if(length >= 4){
-				_this.obj.find('.errormsg').text("您添加的模板不能超过4个");
+				_this.obj.find('.errormsg').text("您添加的模板不能超过4个").show();
 				return false;
 			}
 			$('.templatename').removeClass('current');

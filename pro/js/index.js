@@ -147,6 +147,18 @@ $(document).ready(function(){
 	$('.modal').on('show.bs.modal', centerModals);
 	$(window).on('resize', centerModals);
 
+
+	//推送状态
+	$("body").on('change','select[name="push_state_select"]',function(){
+
+			var val = $(this).val();console.log(val);
+			if(val == 2){
+				$(this).closest('.push_state').find('span.push_state_nubtag').show();
+			} else {
+				$(this).closest('.push_state').find('span.push_state_nubtag').hide();
+			}
+	});
+
 });
 
 /* center modal */

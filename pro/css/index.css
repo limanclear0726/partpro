@@ -70,5 +70,5 @@ label { font-weight:  normal; }
 .templateheader a.current { background: #fff; color: #000; }
 .errormsg { color: red; margin: 5px; }
 
-
+.push_state_nubtag { display: none; margin-left: 5px; }
 

@@ -198,6 +198,22 @@
                 
             </div>
 
+             <!-- Template 模板推送状态 -->
+            <div class="collbox template push_state">
+               <div class="form-inline">
+                    <label for="push_state_select">推送状态：</label>
+                    <select name="push_state_select" class="form-control template_select">
+                        <option value="1">互斥</option>
+                        <option value="2">兼容</option>
+                    </select>
+                    <span class="push_state_nubtag" >
+                     <label for="push_state_nub">阈值：</label>
+                     <input type="number" name="push_state_nub" value="2" class="form-control" />
+                    </span>
+                </div>
+                
+            </div>
+
             <!-- savebox-->
             <div class="savebox">
                 <a href="javascript:void(0)" class="btn mybtn-default savebtn" role="button">保存</a>
