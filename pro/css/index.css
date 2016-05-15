@@ -59,12 +59,12 @@ label { font-weight:  normal; }
 .template .template_select { width: 200px; }
 .template .addTemplate { cursor: pointer; margin-left:4px; }
 
-#mytempplate .modal-content { border-radius: 0; }
-#mytempplate .modal-header { height: auto; padding:0; min-height: 0; border: none; }
+/*#mytempplate .modal-content { border-radius: 0; }
+#mytempplate .modal-header { height: auto; padding:0; min-height: 0; border: none; }*/
 #mytempplate textarea.template_info,#mytempplate .template_addr{ width:60%; }
 #mytempplate .form-inline { margin: 8px 0 ;}
 .template_list { display: inline-block; }
-.templateheader { position: absolute; width:100%; top: -27px; left:0; }
+/*.templateheader { position: absolute; width:100%; top: -27px; left:0; }*/
 .templateheader a.templatename { margin-right:5px; display: inline-block;  background: #0ec28e; color: #fff;  padding:5px 18px; font-size: 12px; cursor: pointer; }
 .templateheader a:hover { text-decoration: none; color: #fff; }
 .templateheader a.current { background: #fff; color: #000; }

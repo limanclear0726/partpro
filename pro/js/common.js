@@ -258,12 +258,16 @@ Template.prototype =  {
 			_this.render(tabdata);
 			
 			_this.bindEvent();
-			_this.obj.find("a.templatename:first").click();
+
+			setTimeout(function(){
+				_this.obj.find("a.templatename:first").click();
+			},300)
+			
 		});
 		
 	},
 
-	//模板头部标题 tabdata = [{"id":"",name:"","data"={}}];
+	//模板头部标题 tabdata = [{"id":"",name:""}];
 	render:function(tabdata){
 		var _this = this, temparr = [];
 		for(var i = 0 ; i < tabdata.length; i++ ){
@@ -350,15 +354,15 @@ Template.prototype =  {
 
 	},
 
-	saveData:function(){
+	saveData:function(data){
 		var _this = this;
-		var data = _this.getData();
+		//var data = _this.getData();
 		var optiondata = [];
 
-		if(!_this.checkData(data)){
-			_this.obj.find('.errormsg').text("请完善信息后保存！").show();
-			return false;
-		}
+		// if(!_this.checkData(data)){
+		// 	_this.obj.find('.errormsg').text("请完善信息后保存！").show();
+		// 	return false;
+		// }
 
 		//判断是新增 还是修改的数据
 		if(data.id > 0){
@@ -373,13 +377,14 @@ Template.prototype =  {
 				}
 			}
 
-		} else {
-			//新增的
-			optiondata = _this.data;
-			data['id'] = (new Date()).valueOf();
-			data['text'] = _this.temp_tabdata[_this.data.length];
-			optiondata.push(data);
 		}
+		// else {
+		// 	//新增的
+		// 	optiondata = _this.data;
+		// 	data['id'] = (new Date()).valueOf();
+		// 	data['text'] = _this.temp_tabdata[_this.data.length];
+		// 	optiondata.push(data);
+		// }
 
 		//交互数据保存模板
 		
@@ -390,8 +395,8 @@ Template.prototype =  {
   //     			if(result.status == 200){
        				
   						_this.data = optiondata; 
-						_this.render_template_select(optiondata);
-						_this.obj.modal('hide');
+						//_this.render_template_select(optiondata);
+						
 
   //     			} else {
   //     				alert(result.msg);
@@ -425,6 +430,12 @@ Template.prototype =  {
 
 		// tabnav 模板a 点击事件
 		$("body").on('click','.template_list a.templatename',function(event){
+			var signdata = _this.getData();
+			if(signdata.id > 0) {
+				var data = _this.saveData(signdata);
+				$('.template_list #'+signdata.id).attr('data',JSON.stringify(signdata));
+			}
+			
 			_this.clear();
 			var self = this;
 			var data = JSON.parse($(self).attr('data'));
@@ -437,21 +448,45 @@ Template.prototype =  {
 		//添加模板事件
 		$("body").on('click','a.addTemplatename',function(event){
 			var self = this;
-			var length = _this.data.length;
-			if(length >= 4){
+			var templen = _this.obj.find('.template_list a.templatename').length;
+			
+			if(templen >= 4 ){
 				_this.obj.find('.errormsg').text("您添加的模板不能超过4个").show();
 				return false;
 			}
-			$('.templatename').removeClass('current');
-			$(self).addClass('current');
-
-			_this.clear();
+			// $('.templatename').removeClass('current');
+			// $(self).addClass('current');
+			_this.data.push({"id":(new Date()).valueOf(),"text":_this.temp_tabdata[templen],"name":""});
+			_this.render(_this.data);
+			_this.render_template_select(_this.data);
+			//_this.clear();
 
 		});
 
 		//模板保存按钮
 		$("body").on('click','.template_save',function(event){
-			_this.saveData();	
+			
+			var signdata = _this.getData();
+			if(signdata.id > 0) {
+				_this.saveData(signdata);
+			}
+
+			var datalist = _this.data;	
+			var errormsg = [];
+			for(var p in datalist){
+				var ckdata = _this.checkData(datalist[p]);
+				if(!ckdata){
+					errormsg.push(datalist[p].text+" 信息不完整");
+				}
+			}
+
+			if(errormsg.length > 0){
+				_this.obj.find(".errormsg").html(errormsg.join("<br/>")).show();
+				return false;
+			}
+
+			_this.obj.modal('hide');
+
 		});
 
 		//关闭按钮
