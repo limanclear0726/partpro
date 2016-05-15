@@ -65,7 +65,7 @@ label { font-weight:  normal; }
 #mytempplate .form-inline { margin: 8px 0 ;}
 .template_list { display: inline-block; }
 .templateheader { position: absolute; width:100%; top: -27px; left:0; }
-.templateheader a.templatename { display: inline-block;  background: #0ec28e; color: #fff;  padding:5px 18px; font-size: 12px; cursor: pointer; }
+.templateheader a.templatename { margin-right:5px; display: inline-block;  background: #0ec28e; color: #fff;  padding:5px 18px; font-size: 12px; cursor: pointer; }
 .templateheader a:hover { text-decoration: none; color: #fff; }
 .templateheader a.current { background: #fff; color: #000; }
 .errormsg { color: red; margin: 5px; }

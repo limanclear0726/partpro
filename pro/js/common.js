@@ -238,14 +238,13 @@ componentGroup.prototype = {
 
 };
 
-//模板
-
-//[{"id":"1","name":"模板A","data":{"name":"模板A","notice_method":"1","info":"内容","click_notice":"1",}}];
+//模板A B C D
+//[{"id":"1","text":"模板A","name":"模板A","notice_method":"1","info":"内容","click_notice":"1"}];
 
 var Template = function(option){
 	this.data = option.data;
 	this.obj  = option.obj;
-	this.temp_tabdata = [];
+	this.temp_tabdata = ['模板A',"模板B","模板C","模板D"];
 };
 
 Template.prototype =  {
@@ -269,7 +268,7 @@ Template.prototype =  {
 		this.data = tabdata;
 		var _this = this, temparr = [];
 		for(var i = 0 ; i < tabdata.length; i++ ){
-			temparr.push('<a class="templatename" id="'+tabdata[i].id+'" data=\''+JSON.stringify(tabdata[i])+'\' >'+tabdata[i].name+'</a>');
+			temparr.push('<a class="templatename" id="'+tabdata[i].id+'" data=\''+JSON.stringify(tabdata[i])+'\' >'+tabdata[i].text+'</a>');
 		}
 		_this.obj.find(".template_list").html(temparr.join(""));
 
@@ -278,9 +277,12 @@ Template.prototype =  {
 	getAjax:function(success){
 
 		// 测试数据
-		var tabdata = [{"id":"1","name":"模板A","name":"模板A","notice_method":"1","info":"内容","click_notice":"1","addr":"北京市海淀区","remind":[1,2,3]},
+		if(this.data.length == 0){
+			this.data = [{"id":"1","text":"模板A","name":"模板A","notice_method":"1","info":"内容","click_notice":"1","addr":"北京市海淀区","remind":[1,2,3]},
 				];
-		success(tabdata);
+		}
+		
+		success(this.data);
 	
 		//交互数据保存模板
 		
@@ -347,7 +349,6 @@ Template.prototype =  {
 	},
 
 	saveData:function(){
-		console.log(this.data);
 		var _this = this;
 		var data = _this.getData();
 		var optiondata = [];
@@ -370,8 +371,9 @@ Template.prototype =  {
 
 		} else {
 			//新增的
-			optiondata = this.data;
+			optiondata = _this.data;
 			data['id'] = (new Date()).valueOf();
+			data['text'] = _this.temp_tabdata[_this.data.length];
 			optiondata.push(data);
 		}
 
@@ -431,8 +433,8 @@ Template.prototype =  {
 		$("body").on('click','a.addTemplatename',function(event){
 			var self = this;
 			var length = _this.data.length;
-			if(length > 4){
-				alert("您添加的模板不能超过4个");
+			if(length >= 4){
+				_this.obj.find('.errormsg').text("您添加的模板不能超过4个");
 				return false;
 			}
 			$('.templatename').removeClass('current');
@@ -455,13 +457,15 @@ Template.prototype =  {
 	render_template_select:function(optiondata){
 		var temparr = [];
 		for(var i = 0; i< optiondata.length; i++){
-			temparr.push('<option value="'+optiondata[i].id+'">'+optiondata[i].name+'</option>');
+			temparr.push('<option value="'+optiondata[i].id+'">'+optiondata[i].text+'</option>');
 		}
 		$('.template select[name="template"]').html(temparr.join(""));
 	}
 
 
 };
+
+
 
 
 
