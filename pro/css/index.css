@@ -67,7 +67,7 @@ label { font-weight:  normal; }
 /*.templateheader { position: absolute; width:100%; top: -27px; left:0; }*/
 .templateheader a.templatename { margin-right:5px; display: inline-block;  background: #0ec28e; color: #fff;  padding:5px 18px; font-size: 12px; cursor: pointer; }
 .templateheader a:hover { text-decoration: none; color: #fff; }
-.templateheader a.current { background: #fff; color: #000; }
+.templateheader a.current { background: #FF0000; color: #fff; }
 .errormsg { color: red; margin: 5px; }
 
 .push_state_nubtag { display: none; margin-left: 5px; }
